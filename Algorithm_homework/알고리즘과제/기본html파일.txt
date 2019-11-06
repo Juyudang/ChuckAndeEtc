@@ -1,0 +1,52 @@
+<!-- html 파일 -->
+<!DOCTYPE html>
+
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <title>QuickSort_Homework</title>
+    </head>
+    <body>        
+        <script src="scripts/main.js"></script>
+        <script src="scripts/quicksort_random.js"></script>
+        <script src="scripts/quicksort_median.js"></script>
+    </body>
+</html>
+
+// Quicksort 첫번째 엘리먼트 피봇 구현
+function swap(array, a, b) {
+    var temp = array[a];
+    array[a] = array[b];
+    array[b] = temp;
+}
+
+function myQuicksort(array, low =0, high = (array.length - 1)) {
+
+    if (high > low) 
+    {
+        var pivotpoint = myPartition(array, low, high);
+        myQuicksort(array, low, pivotpoint - 1);
+        myQuicksort(array, pivotpoint + 1, high);
+    }
+    return array;   
+}
+
+function myPartition(array, low = 0, high = (array.length - 1)) {
+
+    var pivotpoint = low
+    var pivotitem = array[pivotpoint];
+    var j = low;
+
+    for(var i = low + 1;i <= high; i++) {
+        if(array[i] < pivotitem) {
+            j++;
+            swap(array, i, j);
+        }
+    }
+    array[pivotpoint] = array[j];
+    pivotpoint = j;
+    array[j] = pivotitem;
+
+    return pivotpoint;
+}
+
